@@ -25,5 +25,4 @@ dist-ssr
 
 
 # Ignore Firebase configuration file
-src/Firebase.tsx
 
