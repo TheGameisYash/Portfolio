@@ -23,8 +23,7 @@ Welcome to my portfolio repository! This project showcases my skills, experience
 
 ## Technologies
 
-- **Frontend**: Vite, TypeScript, Tailwind CSS, HTML5, JavaScript
-- **Backend**: Node.js (for any server-side functionalities, if applicable)
+- **Frontend**: React.js, Vite, TypeScript, Tailwind CSS, HTML5, JavaScript
 - **APIs**: Integration with Firebase APIs for authentication, data management, and other functionalities
 - **PDF Viewing**: `react-pdf` library for displaying PDF documents
 - **Firebase**: Firestore Database for data storage and management
@@ -84,5 +83,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 Feel free to reach out to me:
 
-- **Email**: yash237yash@gmail.com
-- **LinkedIn**: [Yash Vardhan Sharma](https://www.linkedin.com/in/yash-vardhan-sharma-0b0a64166/)
+- **Email**: xxx@gmail.com
+- **LinkedIn**: [Yash Vardhan Sharma](https://www.linkedin.com/in/yash-vardhan-sharma)
