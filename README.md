@@ -83,5 +83,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 Feel free to reach out to me:
 
-- **Email**: xxx@gmail.com
-- **LinkedIn**: [Yash Vardhan Sharma](https://www.linkedin.com/in/yash-vardhan-sharma)
+- **Email**: yash237yash@gmail.com
+- **LinkedIn**: [Yash Vardhan Sharma](https://www.linkedin.com/in/yash-vardhan-sharma-0b0a64166/)
