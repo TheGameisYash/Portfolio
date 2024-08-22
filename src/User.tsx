@@ -86,7 +86,7 @@ const SkillInfo = [
 ]
 const socialLinks = [
     { link: "https://github.com/TheGameisYash", icon: IconBrandGithub },
-    { link: "https://www.linkedin.com/in/yash-vardhan-sharma-0b0a64166/", icon: IconBrandLinkedin },
+    { link: "https://www.linkedin.com/in/thegameisyash/", icon: IconBrandLinkedin },
     { link: "https://www.instagram.com/thegameisyash", icon: IconBrandInstagram }, 
     { link: "https://www.instagram.com/_", icon: IconBrandInstagram, hide: true }, 
     { link: "https://www.youtube.com/channel/", icon: IconBrandYoutube, hide: true },
