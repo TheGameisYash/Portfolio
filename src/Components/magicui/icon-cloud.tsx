@@ -38,6 +38,15 @@ export const cloudProps: Omit<ICloud, "children"> = {
 };
 
 export const renderCustomIcon = (icon: SimpleIcon, theme: string) => {
+  // TEMPORARY LOGGING:
+  // You can add a condition if you know which icon title turns black
+  // if (icon.title === "THE_ICON_THAT_TURNS_BLACK") {
+  console.log(
+    `Rendering icon: ${icon.title}, Theme: ${theme}, Original Hex: ${icon.hex}, Fallback: ${fallbackHex}`
+  );
+  console.log("Full icon object:", JSON.stringify(icon));
+  // }
+
   const bgHex = theme === "light" ? "#f3f2ef" : "#080510";
   const fallbackHex = theme === "light" ? "#6e6e73" : "#ffffff";
   const minContrastRatio = theme === "dark" ? 2 : 1.2;
