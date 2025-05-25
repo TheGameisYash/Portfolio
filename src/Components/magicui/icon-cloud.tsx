@@ -38,24 +38,35 @@ export const cloudProps: Omit<ICloud, "children"> = {
 };
 
 export const renderCustomIcon = (icon: SimpleIcon, theme: string) => {
-  // Declare variables before using them in the console.log
   const bgHex = theme === "light" ? "#f3f2ef" : "#080510";
-  const fallbackHex = theme === "light" ? "#6e6e73" : "#ffffff";
+  const lightThemeFallback = "#6e6e73"; // Your defined fallback for light theme
+  const darkThemeFallback = "#ffffff";  // Your defined fallback for dark theme
+  const currentFallbackHex = theme === "light" ? lightThemeFallback : darkThemeFallback;
   const minContrastRatio = theme === "dark" ? 2 : 1.2;
 
-  // TEMPORARY LOGGING (as suggested before):
-  // You can add a condition if you know which icon title turns black
-  // if (icon.title === "THE_ICON_THAT_TURNS_BLACK") {
+  let hexToUse = icon.hex; // Start with the original hex color from the icon data
+
+  // If the theme is light AND the original icon color is black,
+  // override hexToUse with the light theme's fallback color.
+  // This ensures black icons get your desired fallback color in light mode.
+  if (theme === "light" && (icon.hex === "#000" || icon.hex === "#000000")) {
+    hexToUse = lightThemeFallback;
+    console.log(`[IconCloud] OVERRIDE: Icon slug "${icon.slug}" (original hex was black) in light theme. Using fallback color: ${hexToUse}`);
+  }
+
+  // TEMPORARY LOGGING (can be removed or commented out after debugging)
   console.log(
-    `Rendering icon: ${icon.title}, Theme: ${theme}, Original Hex: ${icon.hex}, Fallback: ${fallbackHex}`
+    `Rendering icon (slug: ${icon.slug}, title: ${icon.title}), Theme: ${theme}, Original Hex: ${icon.hex}, Hex to Use for renderSimpleIcon: ${hexToUse}, Fallback if contrast fails: ${currentFallbackHex}`
   );
-  console.log("Full icon object:", JSON.stringify(icon));
-  // }
+  // console.log("Full icon object:", JSON.stringify(icon)); // Keep if further debugging is needed
 
   return renderSimpleIcon({
-    icon,
+    icon: {
+      ...icon, // Pass other icon properties like path, title, slug
+      hex: hexToUse, // Use the (potentially overridden) hex color
+    },
     bgHex,
-    fallbackHex,
+    fallbackHex: currentFallbackHex, // Fallback if hexToUse has poor contrast (less likely after our override)
     minContrastRatio,
     size: 50,
     aProps: {
