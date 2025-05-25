@@ -42,7 +42,9 @@ export const renderCustomIcon = (icon: SimpleIcon, theme: string) => {
   const lightThemeFallback = "#6e6e73"; // Your defined fallback for light theme
   const darkThemeFallback = "#ffffff";  // Your defined fallback for dark theme
   const currentFallbackHex = theme === "light" ? lightThemeFallback : darkThemeFallback;
-  const minContrastRatio = theme === "dark" ? 2 : 1.2;
+  
+  // Make minContrastRatio very permissive to prioritize original icon colors
+  const minContrastRatio = 1.01; 
 
   let hexToUse = icon.hex; // Start with the original hex color from the icon data
 
@@ -54,11 +56,10 @@ export const renderCustomIcon = (icon: SimpleIcon, theme: string) => {
     console.log(`[IconCloud] OVERRIDE: Icon slug "${icon.slug}" (original hex was black) in light theme. Using fallback color: ${hexToUse}`);
   }
 
-  // TEMPORARY LOGGING (can be removed or commented out after debugging)
+  // LOGGING (can be adjusted or removed after debugging)
   console.log(
-    `Rendering icon (slug: ${icon.slug}, title: ${icon.title}), Theme: ${theme}, Original Hex: ${icon.hex}, Hex to Use for renderSimpleIcon: ${hexToUse}, Fallback if contrast fails: ${currentFallbackHex}`
+    `Rendering icon (slug: ${icon.slug}, title: ${icon.title}), Theme: ${theme}, Original Hex: ${icon.hex}, Hex to Use for renderSimpleIcon: ${hexToUse}, Fallback if contrast fails: ${currentFallbackHex}, MinContrast: ${minContrastRatio}`
   );
-  // console.log("Full icon object:", JSON.stringify(icon)); // Keep if further debugging is needed
 
   return renderSimpleIcon({
     icon: {
@@ -66,7 +67,7 @@ export const renderCustomIcon = (icon: SimpleIcon, theme: string) => {
       hex: hexToUse, // Use the (potentially overridden) hex color
     },
     bgHex,
-    fallbackHex: currentFallbackHex, // Fallback if hexToUse has poor contrast (less likely after our override)
+    fallbackHex: currentFallbackHex, // Fallback if hexToUse has poor contrast
     minContrastRatio,
     size: 50,
     aProps: {
@@ -91,34 +92,34 @@ export default function IconCloud({ iconSlugs }: DynamicCloudProps) {
 
   useEffect(() => {
     setIsLoading(true);
-    console.log("[IconCloud] Fetching icons for slugs:", iconSlugs);
+    // console.log("[IconCloud] Fetching icons for slugs:", iconSlugs); // Less verbose logging
     fetchSimpleIcons({ slugs: iconSlugs })
       .then(apiData => {
-        console.log("[IconCloud] Fetched icon data:", apiData ? JSON.stringify(apiData).substring(0, 500) + "..." : "null/undefined");
+        // console.log("[IconCloud] Fetched icon data:", apiData ? JSON.stringify(apiData).substring(0, 200) + "..." : "null/undefined");
         if (!apiData || !apiData.simpleIcons || Object.keys(apiData.simpleIcons).length === 0) {
-          console.error("[IconCloud] No valid icons data received from fetchSimpleIcons.");
+          console.error("[IconCloud] No valid icons data received from fetchSimpleIcons for slugs:", iconSlugs);
         }
         setData(apiData);
       })
       .catch(error => {
-        console.error("[IconCloud] Error fetching simple icons:", error);
+        console.error("[IconCloud] Error fetching simple icons for slugs:", iconSlugs, error);
       })
       .finally(() => {
         setIsLoading(false);
-        console.log("[IconCloud] Finished fetching, isLoading:", false);
+        // console.log("[IconCloud] Finished fetching, isLoading:", false);
       });
   }, [iconSlugs]);
 
   const renderedIcons = useMemo(() => {
     if (!data) {
-      console.log("[IconCloud] No data object to render icons.");
+      // console.log("[IconCloud] No data object to render icons.");
       return null;
     }
     if (!data.simpleIcons || Object.keys(data.simpleIcons).length === 0) {
-      console.log("[IconCloud] data.simpleIcons is null or empty. Cannot render icons.");
+      // console.log("[IconCloud] data.simpleIcons is null or empty. Cannot render icons.");
       return null;
     }
-    console.log("[IconCloud] Preparing to render icons. Current theme:", theme || "light", "Number of icons:", Object.keys(data.simpleIcons).length);
+    // console.log("[IconCloud] Preparing to render icons. Current theme:", theme || "light", "Number of icons:", Object.keys(data.simpleIcons).length);
     return Object.values(data.simpleIcons).map((icon) =>
       renderCustomIcon(icon, theme || "light")
     );
@@ -136,7 +137,7 @@ export default function IconCloud({ iconSlugs }: DynamicCloudProps) {
   if (!renderedIcons || renderedIcons.length === 0) {
     return (
       <div style={{ textAlign: "center", paddingTop: "20px" }}>
-        No icons to display.
+        No icons to display for the given slugs.
       </div>
     );
   }
