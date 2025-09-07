@@ -126,16 +126,19 @@ const Contact = () => {
         };
     }, []);
 
-    // Optimized field validation
+    // UPDATED: Field validation - phone validation removed from here
     const handleChange = (id: string, value: string) => {
-        // Phone number formatting
+        // Phone number formatting and NO validation in Contact.tsx
         if (id === 'phone') {
             const formatted = formatPhoneNumber(value);
             setFormData({ ...formData, [id]: formatted });
-        } else {
-            setFormData({ ...formData, [id]: value });
+            // Clear any existing phone error (validation handled in Validation.ts)
+            setFormError({ ...formError, [id]: "" });
+            return; // Exit early for phone
         }
         
+        // For other fields, update data and validate
+        setFormData({ ...formData, [id]: value });
         const error = validateForm(id, value);
         setFormError({ ...formError, [id]: error });
         
@@ -166,19 +169,21 @@ const Contact = () => {
                     ease: "power2.out",
                     yoyo: true,
                     repeat: 3,
-                    // FIXED: Wrap gsap.set in callback function
                     onComplete: () => { gsap.set(fieldElement, { x: 0 }); }
                 });
             }
         }
     };
 
-    // Optimized form submission
+    // UPDATED: Form submission - phone validation removed from here
     const handleSubmit = async () => {
         let valid = true;
         let newFormError: { [key: string]: string } = {};
         
+        // Validate all fields EXCEPT phone (phone validation handled in Validation.ts)
         for (let key in formData) {
+            if (key === 'phone') continue; // Skip phone validation in Contact.tsx
+            
             const error = validateForm(key, formData[key]);
             if (error.length > 0) {
                 newFormError[key] = error;
@@ -196,7 +201,6 @@ const Contact = () => {
                     ease: "power2.out",
                     yoyo: true,
                     repeat: 3,
-                    // FIXED: Wrap gsap.set in callback function
                     onComplete: () => { gsap.set(formRef.current, { x: 0 }); }
                 });
             }
@@ -251,7 +255,6 @@ const Contact = () => {
                         y: -20,
                         duration: 0.4,
                         ease: "power2.out",
-                        // FIXED: Wrap state change in callback function
                         onComplete: () => { setIsSuccess(false); }
                     });
                 }
@@ -447,7 +450,7 @@ const Contact = () => {
                 <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-tr from-blue-500/20 to-primaryColor/20 rounded-full blur-2xl opacity-60" />
             </div>
 
-            {/* Contact information cards (NO PERSONAL PHONE NUMBER) */}
+            {/* Contact information cards */}
             <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 {[
                     { 
