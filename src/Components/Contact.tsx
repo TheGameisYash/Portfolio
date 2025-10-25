@@ -40,16 +40,6 @@ const Contact = () => {
         lg: "lg"
     });
 
-    // Format phone number as user types
-    const formatPhoneNumber = (value: string) => {
-        const cleaned = value.replace(/\D/g, '');
-        const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-        if (match) {
-            return `(${match[1]}) ${match[2]}-${match[3]}`;
-        }
-        return value;
-    };
-
     // Optimized entrance animations
     useEffect(() => {
         const container = containerRef.current;
@@ -126,19 +116,17 @@ const Contact = () => {
         };
     }, []);
 
-    // UPDATED: Field validation - phone validation removed from here
+    // ✅ UPDATED: Skip phone validation entirely
     const handleChange = (id: string, value: string) => {
-        // Phone number formatting and NO validation in Contact.tsx
+        setFormData({ ...formData, [id]: value });
+        
+        // Skip validation for phone field completely
         if (id === 'phone') {
-            const formatted = formatPhoneNumber(value);
-            setFormData({ ...formData, [id]: formatted });
-            // Clear any existing phone error (validation handled in Validation.ts)
             setFormError({ ...formError, [id]: "" });
-            return; // Exit early for phone
+            return;
         }
         
-        // For other fields, update data and validate
-        setFormData({ ...formData, [id]: value });
+        // Validate other fields (name, email, message)
         const error = validateForm(id, value);
         setFormError({ ...formError, [id]: error });
         
@@ -175,14 +163,14 @@ const Contact = () => {
         }
     };
 
-    // UPDATED: Form submission - phone validation removed from here
+    // ✅ UPDATED: Skip phone validation in submission
     const handleSubmit = async () => {
         let valid = true;
         let newFormError: { [key: string]: string } = {};
         
-        // Validate all fields EXCEPT phone (phone validation handled in Validation.ts)
+        // Validate all fields EXCEPT phone
         for (let key in formData) {
-            if (key === 'phone') continue; // Skip phone validation in Contact.tsx
+            if (key === 'phone') continue; // Skip phone validation
             
             const error = validateForm(key, formData[key]);
             if (error.length > 0) {
@@ -351,7 +339,7 @@ const Contact = () => {
                     </div>
                 )}
 
-                {/* Form fields including phone */}
+                {/* Form fields */}
                 <div className="relative z-10 space-y-8">
                     {Object.keys(form).map((key, index) => (
                         <div 
@@ -362,7 +350,7 @@ const Contact = () => {
                             <FloatingInput 
                                 id={key} 
                                 name={
-                                    key === 'phone' ? 'Phone Number (Optional)' :
+                                    key === 'phone' ? 'Phone Number (Optional - Any Format)' :
                                     key === 'message' ? 'Your Message' :
                                     key.charAt(0).toUpperCase() + key.slice(1)
                                 }
@@ -372,7 +360,7 @@ const Contact = () => {
                             />
                             {key === 'phone' && (
                                 <div className="mt-2 text-sm text-primaryColor/70">
-                                    💡 Providing your phone number helps me respond faster to urgent inquiries
+                                    💡 Enter your phone number in any format - no validation required
                                 </div>
                             )}
                         </div>
