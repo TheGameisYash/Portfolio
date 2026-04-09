@@ -3,18 +3,18 @@ import { IconBrandGithub, IconBrandInstagram, IconBrandLeetcode, IconBrandLinked
 
 const Info = {
     name: "Yash Vardhan Sharma",
-    stack: ["Software Engineer", "Full Stack Developer", "Competitive Programmer", "Freelancer", "Open Source Contributor"],
-    bio: "I'm a passionate software engineer specialized in crafting efficient and scalable solutions with modern technologies. With expertise spanning frontend frameworks, backend architectures, and database optimization, I deliver top-notch web applications that prioritize performance and user experience. As a dedicated freelancer and open source contributor, I provide innovative services that exceed client expectations while fostering collaborative development communities. Let's connect and create something amazing together!"
+    stack: ["Software Engineer", "Full Stack Developer", "AI Enthusiast", "Competitive Programmer", "Freelancer"],
+    bio: "I'm a passionate software engineer specializing in building high-performance, scalable web applications and intelligent systems. My expertise bridges modern frontend frameworks, highly optimized backend architectures, and AI integrations. Whether it's slashing database reads by 99.9% or designing dynamic glassmorphism UIs, I focus on delivering exceptional user experiences and robust enterprise solutions. Let's connect and build something extraordinary together!"
 }
 
 
 const ProjectInfo = [
     {
         title: "PC Optimizer",
-        desc: "Enterprise-grade license management system with HWID protection, Firebase integration, and admin dashboard. Features secure authentication, real-time validation, license generation, HWID reset handling, and comprehensive activity logging. Built for scalability with ultra-optimized database operations achieving 99.9% read reduction through intelligent caching and batched writes.",
+        desc: "A sophisticated PC optimization and license management suite protected by enterprise-grade HWID verification. Engineered a high-performance admin dashboard, real-time license generation, and an intelligent caching mechanism that aggressively slashes database read operations by 99.9%. Built to scale with secure authentication and granular activity logging.",
         image: "pc-optimizer.png",
         live: true,
-        technologies: ["Node.js", "Express", "Firebase", "JavaScript", "HTML/CSS"],
+        technologies: ["Node.js", "Express", "Firebase", "JavaScript", "Caching Systems"],
         link: "https://pcoptimizer-vue.onrender.com/",
         github: "https://github.com/TheGameisYash/PCoptimizer-vue"
     },
@@ -96,19 +96,23 @@ const ProjectInfo = [
 const SkillInfo = [
     {
         title: "Frontend",
-        skills: ["HTML", "CSS", "SASS", "JavaScript", "React JS", "Vue JS", "Tailwind CSS", "GSAP", "Three JS", "Material UI", "Bootstrap"]
+        skills: ["React JS", "Vue JS", "Tailwind CSS", "GSAP", "Three JS", "JavaScript", "TypeScript", "Material UI", "HTML", "CSS"]
     },
     {
         title: "Backend",
         skills: ["Node JS", "Express JS", "MySQL", "MongoDB", "Firebase", "PostgresSQL", "RESTful APIs"]
     },
     {
+        title: "AI & Machine Learning",
+        skills: ["Python", "TensorFlow", "PyTorch", "LangChain", "OpenAI App Integration", "Hugging Face", "Generative AI", "RAG Algorithms"]
+    },
+    {
         title: "Languages",
-        skills: ["C", "C++", "C Sharp", "Python", "JavaScript", "TypeScript"]
+        skills: ["C", "C++", "C Sharp", "Python", "JavaScript", "TypeScript", "SQL"]
     },
     {
         title: "Tools & DevOps",
-        skills: ["Git", "Github", "VS Code", "Vite", "Postman", "MongoDB Compass", "Vercel", "Render"]
+        skills: ["Git", "GitHub", "Docker", "Vite", "Postman", "Vercel", "Render", "VS Code"]
     }
 ]
 

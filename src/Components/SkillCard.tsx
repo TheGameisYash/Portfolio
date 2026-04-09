@@ -14,6 +14,7 @@ const SkillCard = (props: any) => {
     const lightRayRef = useRef<HTMLDivElement>(null);
     const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
     const [skillMastery, setSkillMastery] = useState<{ [key: string]: number }>({});
+    const [imageErrors, setImageErrors] = useState<{ [key: string]: boolean }>({});
     const [cardEnergy, setCardEnergy] = useState(0);
 
     // Custom easing curves for premium feel
@@ -526,11 +527,18 @@ const SkillCard = (props: any) => {
                             aria-pressed={selectedSkill === skill}
                             aria-label={`${selectedSkill === skill ? 'Deselect' : 'Select'} ${skill}`}
                         >
-                            <img 
-                                src={`Icons/${skill}.png`}
-                                alt={`${skill} icon`}
-                                className="w-10 h-10 bs-mx:w-8 bs-mx:h-8 object-contain relative z-10"
-                            />
+                            {!imageErrors[skill] ? (
+                                <img 
+                                    src={`Icons/${skill}.png`}
+                                    alt={`${skill} icon`}
+                                    className="w-10 h-10 bs-mx:w-8 bs-mx:h-8 object-contain relative z-10 transition-transform duration-500"
+                                    onError={() => setImageErrors(prev => ({ ...prev, [skill]: true }))}
+                                />
+                            ) : (
+                                <div className="w-10 h-10 bs-mx:w-8 bs-mx:h-8 flex items-center justify-center relative z-10 bg-gray-700/50 rounded-full border border-gray-500/50 shadow-[0_0_10px_rgba(100,255,218,0.2)]">
+                                    <span className="text-xl sm-mx:text-lg font-bold text-primaryColor opacity-80">{skill.charAt(0)}</span>
+                                </div>
+                            )}
                             <span className="skill-text text-gray-200 font-semibold text-lg sm-mx:text-base xs-mx:text-sm relative z-10">
                                 {skill}
                             </span>
