@@ -10,6 +10,15 @@ const Info = {
 
 const ProjectInfo = [
     {
+        title: "PC Remote Control",
+        desc: "Full-featured Android application that transforms your smartphone into a powerful wireless remote control for your PC over local Wi-Fi. Supports real-time mouse trackpad with multi-touch gestures, full virtual keyboard input, media playback controls (play/pause/skip/volume), remote file browser, custom app launcher shortcuts, and a live connection status monitor. Built with a robust client-server architecture — the Android client communicates via TCP/UDP sockets with a lightweight Java desktop server, ensuring low-latency, reliable control. Features an intuitive Material Design UI with dark mode support and auto-discovery of PCs on the same network.",
+        image: "pc-remote-control.png",
+        live: false,
+        technologies: ["Android", "Java", "TCP/IP Sockets", "Material Design", "Wi-Fi"],
+        link: "https://github.com/TheGameisYash/PC-Control-App/releases",
+        github: "https://github.com/TheGameisYash/PC-Control-App"
+    },
+    {
         title: "PC Optimizer",
         desc: "A sophisticated PC optimization and license management suite protected by enterprise-grade HWID verification. Engineered a high-performance admin dashboard, real-time license generation, and an intelligent caching mechanism that aggressively slashes database read operations by 99.9%. Built to scale with secure authentication and granular activity logging.",
         image: "pc-optimizer.png",
